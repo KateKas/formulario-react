@@ -1,29 +1,27 @@
 import { Component } from "react";
 import "./App.css";
 import FormularioCadastro from "./components/FormularioCadastro/FormularioCadastro";
-import {Container, Typography } from '@mui/material';
+import { Container, Typography } from "@mui/material";
+import { validarCPF, validarSenha } from "./models/cadastro";
 
 class App extends Component {
   render() {
     return (
       <Container component="article" maxWidth="sm">
-        <Typography variant="h3" component="h1" align="center">Formulário de Cadastro</Typography>
-        <FormularioCadastro aoEnviar={aoEnviarForm} validarCPF={validarCPF} />
+        <Typography variant="h3" component="h1" align="center">
+          Formulário de Cadastro
+        </Typography>
+        <FormularioCadastro
+          aoEnviar={aoEnviarForm}
+          validacoes={{ cpf: validarCPF, senha: validarSenha }}
+        />
       </Container>
     );
   }
 }
 
-function aoEnviarForm(dados){
+function aoEnviarForm(dados) {
   console.log(dados);
-}
-
-function validarCPF(cpf){
-  if(cpf.length !== 11){
-    return {valido:false, texto: "CPF deve ter 11 dígitos"};
-  } else{
-    return {valido:true, texto: ""}
-  }
 }
 
 export default App;
